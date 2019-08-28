@@ -1,0 +1,812 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+
+<style>
+.div-alert-box-orders{
+  width: 80%;
+  left:10%;
+
+}
+
+.edit-input{
+padding:1px;
+margin:3px;
+ border:1px solid #d3dbde;
+ height:22px;
+ display:inline-block;
+}
+.edit-ul li{
+line-height:28px;
+
+}
+
+.edit-ul li span{
+  width:130px;
+  display:inline-block;
+  text-align:right;
+ 
+}
+.search_gr_p{
+ height:28px;
+}
+
+
+#or_detail_thead{table-layout:fixed;word-wrap:break-word;}
+.search_gr_p span{
+display:inline-block;
+line-height: 25px;
+height: 25px;
+
+float: left;
+
+margin-left: 5px;
+border-radius: 3px;
+}
+
+p{
+ line-height:28px;
+}
+
+.search_gr_p span  *{
+
+line-height: 25px;
+height: 25px;
+border: solid 1px #d3dbde;
+
+}
+
+.setPage{
+
+
+}
+
+
+#QB_group_send,#group_send_eport{
+padding:3px;
+ margin:3px;
+border: solid 1px #d3dbde;
+width:86px;
+cursor:pointer;
+}
+.btn_sty{
+padding:3px;
+ margin:3px;
+border: solid 1px #d3dbde;
+
+cursor:pointer;
+}
+
+#wl_select_box,#wl_gp_select_box,#issue{
+  width: 20%;
+  margin:5% auto;
+  min-height:100px;
+  left:40%;
+  background-color:white;
+  position:fixed;
+  display:none;
+  z-index:3000;
+  text-align:center;
+}
+
+#confirm_send,#confirm_gpsend{
+  padding:3px 8px 3px 8px;
+  color:#3c95c8;
+  cursor:pointer;
+  margin:18px 0px 8px 0px;
+}
+
+input{
+	border: 1px solid #ccc;
+	padding: 7px 0px;
+	border-radius: 3px;
+	padding-left:5px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+}
+input:focus{
+	border-color: #66afe9;
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+
+</style>
+
+<script type="text/javascript" src="../../js/jquery.js"></script>
+<script src="../../js/setPage.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".click").click(function(){
+  $(".tip").fadeIn(200);
+  });
+  
+  $(".tiptop a").click(function(){
+  $(".tip").fadeOut(200);
+});
+
+  $(".sure").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+  $(".cancel").click(function(){
+  $(".tip").fadeOut(100);
+});
+
+});
+</script>
+
+
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    <li><a href="#">营销管理</a></li>
+    <li><a href="#">优惠券管理</a></li>
+    </ul>
+    </div>
+    
+    <div class="rightinfo">
+    
+		<div class="tools">
+		
+			<p class="search_gr_p">
+				<!--<span>状态:</span><span><select class="s-input" style="width:76px;"><option value="-1">所有</option><option value="0">未发送</option><option value="1">待回执</option><option value="2">发送失败</option><option value="3">发送成功</option><option value="4">备案失败</option><option value="5">备案成功</option></select></span>
+			-->
+				<span>优惠券状态:</span><span><select class="s-input" id="status_select"><option value="1">所有</option><option value="2">可使用</option><option value="3">已失效</option></select></span>
+				<span>优惠券类型:</span><span><select class="s-input" id="type_select"><option value="1">所有</option><option value="2">无门槛</option><option value="3">满减</option></select></span>
+			
+				<span>创建日期:</span> <span><input class="s-input" style="width:108px;" type="date"></span><span> -- <input class="s-input" style="width:108px;" type="date"></span>
+				<span>优惠券名:</span><span><input class="s-input" style="width:108px;" type="text"></span>
+			</p>		
+					</br></br></br>	
+			<div style="width:100%;height:34px;">&nbsp;&nbsp;
+				<button id="search_coupon_btn" class="btn_sty" style="width:40px;">检索</button>
+				<button id="reflash_coupon_btn" class="btn_sty" style="width:40px;">刷新</button>
+				<button id="back_to_orlist" class="btn_sty" style="width:60px;">返回列表</button></span>
+				<button id="issue_coupon" class="btn_sty" style="width:100px;">发行优惠券</button>
+				
+			</div>
+				
+			<ul class="toolbar1"></ul>
+    
+		</div>
+    
+	
+	
+
+		<div class="issue" id="or_coupon_index" style="text-align: center;display:none;">
+			
+			<div class="right-content-head" style="margin-top:20px;">
+				<p style="font-size:28px;line-height:30px;"><b style="margin-left:5px;">创建优惠券</b></p>
+			</div>
+		
+			<ul class="edit-ul" id="or_drtail_ul" style="margin-top:20px;">
+				<li><span>优惠券名称:</span><span><input class="edit-input"  type="text"></span></li>
+				<li><span>发行数量:</span><span><input class="edit-input"  type="text"></span></li>
+				<li><span>满减限制:</span><span><input class="edit-input"  type="text"></span></li>
+				<li><span>面值:</span><span><input class="edit-input"  type="text"></span></li>
+				<li><span>每人领取限制:</span><span><select class="s-input" id="receive-limit"><option value="6">无限制</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></span>		
+				</li>
+				</li><li><span>详细信息:</span><span><input class="edit-input"  type="text"></span>
+				</li><li><span>有效日期:</span> <span><input class="edit-input" type="date"></span><span> -- <input class="edit-input" style="width:108px;" type="date"></span>
+				</li><li><span>限制的使用区域:</span><span><input class="edit-input"  type="text"></span>
+			 </li>
+			 </br>
+				<li><button id="add" class="addCoupon" style="height:30px;width:50px;">添加</button></li>
+			</ul>
+		 
+		</div>   
+
+
+
+
+
+		
+	<div class="or-index" id="or_panel_index_1">	
+		<table class="tablelist" id="order_tb_1">
+			<thead>
+			<tr>
+			<th><input name="" type="checkbox" value="" checked="checked"/></th>
+			<th>序号</th>
+			<th>优惠劵批次号</th>
+			<th>优惠劵名称</th>
+			<th>面值</th>	
+			<th>优惠劵类型</th>
+			<th>数量</th>
+			<th>已领取</th>
+			<th>已使用</th>
+			<th>每人领取限制</th>
+			<th>使用范围</th>
+			<th>详细信息</th>
+			<th>启用时间</th>		
+			<th>失效时间</th>	
+			<th>创建时间</th>
+			<th>操作</th>
+			</tr>
+			</thead>
+			<tbody id="orders_record_table">
+		   
+		  
+			<tr>
+			<td><input name="" type="checkbox" value="" /></td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td>加载中。。。</td>
+			<td><a href="#" class="tablelink">---</a>    </td>
+			</tr>
+			
+			
+		   
+			
+				
+			</tbody>
+		</table>
+		
+	   
+		<div class="pagin" id="pages">
+		
+		</div>
+		
+	</div>	
+
+    
+    <script type="text/javascript">
+	$('.tablelist tbody tr:odd').addClass('odd');
+	$(function(){
+	
+		$.extend({
+			//  获取对象的长度，需要指定上下文 this
+			Object:     {
+			count: function( p ) {
+					p = p || false;
+					return $.map( this, function(o) {
+						if( !p ) return o;
+						return true;
+					} ).length;
+				}
+			}
+		});
+	})
+	
+	var ordersRecord_module = (function(){
+　　　　var _count = 0;
+        var cache={};
+		var cache_N;
+		var cache_page;
+		var cache_size;
+        
+      var searchDatas=function(page,size,couponBatch_status,couponBatch_type,startDate,endDate,couponName){
+	     var data={
+			couponBatch_type:couponBatch_type,
+			couponBatch_status:couponBatch_status,
+			startDate:startDate,
+			endDate:endDate,
+			couponName:couponName,
+			page:page,
+			size:size	
+			}
+			
+			for (var key in data){
+			   if(data[key]==null||(data[key]+"").trim()=="null"||(data[key]+"").trim()==""||(data[key]+"").trim()=="undefined"){
+			        delete data[key];
+			   }
+			}
+			
+		    $.ajax({ 
+            url:  "http://10.242.10.225:8080/silver-web-shop/coupon/merchantFindCoupon", 
+            type: "POST",
+            data: data, 
+            beforeSend : function(xhr) { 
+                xhr.withCredentials = true; 
+            },
+            success: function(response){
+			//console.info(response);
+             showUINewV(response,page,size,couponBatch_status,couponBatch_type,startDate,endDate,couponName);
+            }
+        });
+	     
+	  };		
+		
+
+	  var issueCoupon=function(couponName,couponNumber,couponType,couponValue,receiveLimit,detailInfo,startTime,endingTime,useRange){
+	     var data={
+			couponName:couponName,
+			couponNumber:couponNumber,
+			couponType:couponType,
+			couponValue:couponValue,
+			receiveLimit:receiveLimit,
+			detailInfo:detailInfo,	
+			startTime:startTime,
+			endingTime:endingTime,
+			useRange:useRange
+			}
+			
+			for (var key in data){
+				if(data[key]=="") {
+					alert("请输入完整数据");
+					return ;
+				}
+						   if(data[key]==null||(data[key]+"").trim()=="null"||(data[key]+"").trim()==""||(data[key]+"").trim()=="undefined"){
+			        delete data[key];
+			   }
+			}
+			if((data["status"]+"").trim()=="-1"){
+			 delete data["status"];
+			}
+			
+		    $.ajax({ 
+            url:  "http://10.242.10.225:8080/silver-web-shop/coupon/merchantIssueCoupon", 
+            type: "POST",
+            data: data, 
+            beforeSend : function(xhr) { 
+                xhr.withCredentials = true; 
+            },
+            success: function(response){
+				console.info(response);
+				if(response.status==1){
+					
+					alert("发行成功");	
+					$(".issue").fadeOut("fast");
+					$(".or-index").css('display','block');
+				} else {
+					alert("与服务器连接异常");
+				}
+		
+            },
+			error:function(response){
+				alert("请输入完整数据");			
+			}
+        });
+	     
+	  };		
+		
+	var showUINewV=function(response,page,size,couponBatch_status,couponBatch_type,startDate,endDate,couponName){
+		var html='';
+		if(response.status!=1){
+		  html+='<tr>'+
+                       '<td><input name="" type="checkbox" value="" /></td>'+
+                       '<td>'+"暂无数据"+'</td>'+
+					   '<td>'+"暂无数据"+'</td>'+
+					   '<td>'+"暂无数据"+'</td>'+
+					   '<td>'+"暂无数据"+'</td>'+
+                       '<td>'+"暂无数据"+'</td>'+
+                       '<td>'+"暂无数据"+'</td>'+
+                       '<td>'+"暂无数据"+'</td>'+
+					   '<td>'+"暂无数据"+'</td>'+
+                       '<td>'+"暂无数据"+'</td>'+
+                       '<td>'+"暂无数据"+'</td>'+
+                       '<td>'+"暂无数据"+'</td>'+
+					   '<td>'+"暂无数据"+'</td>'+
+					   '<td>'+"暂无数据"+'</td>'+
+                       '<td>'+"暂无数据"+'</td>'+
+                       '<td><a href="#" class="tablelink" onclick="">---</a>    </td>'+
+                       '</tr>';
+					    MapSetPage('ordersRecord_module.searchDatas',page,size,{},0,"pages");
+					  $("#orders_record_table").html(html);   
+		  return;
+		}
+		    
+			var len = response.datas.length;
+			
+			var json=response.datas;
+			console.info(json);
+			console.info(json[0].startTime);
+			for(var i=0;i<len;i++){
+				
+				 html+='<tr>'+
+                       '<td><input name="" type="checkbox" value="" /></td>'+
+                       '<td>'+(i+1)+'</td>'+
+					   '<td>'+json[i].batchNumber+'</td>'+
+					   '<td>'+json[i].couponName+'</td>'+
+					   '<td>'+json[i].couponValue+'</td>'+
+					   '<td>';
+ 
+				if(json[i].couponType != 0) {
+					html+="满 "+json[i].couponType+" 优惠券";
+				} else {
+					html += "无门槛优惠券";
+				}
+
+				html+= '</td>'+    
+					   '<td>'+json[i].couponNumber+'</td>'+
+					   '<td>'+json[i].quantityOfReceive+'</td>'+
+                       '<td>'+json[i].quantityOfUse+'</td>'+'<td>';
+					   
+				if(json[i].receiveLimit==6){
+					html+="无领取限制";
+				} else{
+					html+=json[i].receiveLimit;
+				}
+				html+= '</td>'+
+					   '<td>'+json[i].useLimit+'</td>'+
+					   '<td>'+json[i].detailInfo+'</td>'+  
+					   '<td>'+transFormDate1(json[i].startTime)+'</td>'+  
+					   '<td>'+transFormDate1(json[i].endingTime)+'</td>'+  
+					   '<td>'+transFormDate2(json[i].createDate)+'</td>'+  
+         
+                       '<td><a href="#" class="tablelink" onclick="ordersRecord_module.recordDetail('+i+')">查看</a>    </td>'+
+					   
+					   //-->
+                       '</tr>';
+					   cache[i]=json[i];
+			}
+		  $("#orders_record_table").html(html);
+		  var count = Math.ceil(response.count / size);
+		  var ysMap={
+			0:couponBatch_status,
+			1:couponBatch_type,
+			2:startDate,
+			3:endDate,
+			4:couponName,
+		  };
+		  cache_page=page;
+		  cache_size=size;
+		  MapSetPage('ordersRecord_module.searchDatas',page,size,ysMap,count,"pages");
+		};
+		 
+		var getQbUploadStatusName=function(sign){
+		    if(sign=="C"){
+			return "推送成功";
+			}else if(sign=="F"){
+			 return "推送失败";
+			}
+			return "--"
+		} 
+		 
+		 
+		 var updateOrderHead=function(orgMessageID,entOrderNo,opType,eBEntNo,eBEntName,customsCode,cIQOrgCode,recipientName,recipientAddr,recipientTel,recipientProvincesCode,orderDocAcount,orderDocName,orderDocId,orderDocTel,tmsServiceCode){
+		   var data={
+		    orgMessageID:orgMessageID,
+		    entOrderNo:entOrderNo,
+			eBEntNo:eBEntNo,
+			eBEntName:eBEntName,
+			opType:opType,
+			cIQOrgCode:cIQOrgCode,
+			customsCode:customsCode,
+			recipientName:recipientName,
+			recipientAddr:recipientAddr,
+			recipientTel:recipientTel,
+			recipientProvincesCode:recipientProvincesCode,
+			orderDocAcount:orderDocAcount,
+			orderDocName:orderDocName,
+			orderDocId:orderDocId,
+			orderDocTel:orderDocTel,
+			tmsServiceCode:tmsServiceCode
+			}
+			
+			for (var key in data){
+			   if(data[key]==null||(data[key]+"").trim()=="null"||(data[key]+"").trim()==""||(data[key]+"").trim()=="undefined"){
+			        delete data[key];
+			   }
+			}
+		 
+		    $.ajax({ 
+            url:  urlPrefix+"silver-web/role/orderModify", 
+            type: "POST",
+            data: data, 
+            beforeSend : function(xhr) { 
+                xhr.withCredentials = true; 
+            },
+            success: function(response){
+			 if(response.status==1){
+			   $("#save_text").css('display','none');
+			   $("#cancel_text").css('display','none');
+		       $("#edit_text").fadeIn();
+		       $("#or_drtail_ul").children().children(".edit-input").attr('disabled',true);
+			   $("#search_coupon_btn").click();
+			 }
+             alert(response.msg);
+            }
+        });
+		 
+		 };
+		 
+		 
+		 
+	 var resend=function(messageId){
+		 var data={
+		   type:1,
+	  messageId:messageId
+		 }
+		    $.ajax({ 
+            url:  urlPrefix+"silver-web/role/reuploadRecord", 
+            type: "POST",
+            data: data, 
+            beforeSend : function(xhr) { 
+                xhr.withCredentials = true; 
+            },
+            success: function(response){
+			  alert(response.msg);
+            }
+        });
+		  
+		 };
+		 
+		 
+	var resned_QB=function(data,code){
+	   $.ajax({ 
+            url:  urlPrefix+"silver-web/role/propellingMovementQB", 
+            type: "POST",
+            data: data, 
+            beforeSend : function(xhr) { 
+                xhr.withCredentials = true; 
+            },
+            success: function(response){
+			   if(response.status!=1){
+			    $("#orders_record_table").children("tr").eq(data.index).children().eq(7).html('推送失败');
+			   }else{
+			    $("#orders_record_table").children("tr").eq(data.index).children().eq(7).html('推送成功');
+			   }
+			   if(code==1){
+			     alert(response.msg);
+			   }
+            }
+        });
+	}	 
+	var transFormDate1= function(dd){ //设置时间转换格式
+		if(dd==null)
+			return null;
+		date = new Date(dd.time);
+		var y = date.getFullYear();  //获取年
+		var m = date.getMonth() + 1;  //获取月
+		m = m < 10 ? '0' + m : m;  //判断月是否大于10
+		var d = date.getDate();  //获取日
+		d = d < 10 ? ('0' + d) : d;  //判断日期是否大10
+		return y + '-' + m + '-' + d;  //返回时间格式
+	}
+
+
+	 var commonChecked= function (obj) {
+	   
+		$(obj +' thead input[type=checkbox]').change(function(){
+			var len = $(obj+' tbody input[type=checkbox]').length;
+			if(this.checked){
+				for(var i=0;i<len;i++){
+					$(obj+' tbody input[type=checkbox]')[i].checked = true;
+				}
+			}else{
+				for(var i=0;i<len;i++){
+					$(obj+' tbody input[type=checkbox]')[i].checked = false;
+				}
+			}
+		})
+	  
+	};
+			
+			 
+		 var transFormDate2 =function (dd){
+			if(dd==null){
+				return "";
+			}
+		   var date= new Date(dd.time);
+		   var d = date.getDate();
+		   if(d<10){
+			   d="0"+d;
+		   }
+		   var m =(date.getMonth()+1);
+		   if(m<10){
+			   m="0"+m;
+		   }
+		   var h = date.getHours();
+		   if(h<10){
+			   h="0"+h;
+		   }
+		   var min =date.getMinutes();
+		   if(min<10){
+			   min="0"+min;
+		   }
+		   var ss = date.getSeconds();
+		   if(ss<10){
+			   ss="0"+ss;
+		   }
+		   var result = date.getFullYear()+'-'+m+'-'+d+' '+h+":"+min+":"+ss;
+		   return result;
+		}
+		 
+		 
+		 var clickEvent=function(){
+		   $(".div-alert-box-cancel").click(function(){
+		   $("#orders_record_detail_box").fadeOut();
+		   $(".div-helper").css('display','none');
+		
+		})
+		
+		   $("#back_to_orlist").click(function(){
+		    $(".or-index").css('display','none');
+			$(".issue").css('display','none');
+			$("#or_panel_index_1").fadeIn();
+		   
+		   })
+		
+
+			//检索
+		   $("#search_coupon_btn").click(function(){
+		       var obj=$(".search_gr_p").children().children(".s-input");
+			   if(cache_page==undefined){
+			      cache_page=1;
+			   }
+			   if(cache_size==undefined){
+			      cache_size=10;
+			   }
+		       searchDatas(1,cache_size, $("#status_select").val(),$("#type_select").val(), obj.eq(2).val(), obj.eq(3).val(), obj.eq(4).val());
+		   })
+		
+		  $("#reflash_coupon_btn").click(function(){
+		     $(".search_gr_p").children().children(".s-input").val('');
+			$(".edit-ul").children().children(".edit-input").val('');
+		     searchDatas(1,10);
+		  })
+		  
+		  
+		  $("#edit_text").click(function(){
+		       $(this).css('display','none');
+		       $("#save_text").fadeIn();
+			   $("#cancel_text").fadeIn();
+			   var obj = $("#or_drtail_ul").children().children(".edit-input");
+		       obj.attr('disabled',false);
+			   obj.eq(1).attr('disabled',true);
+			   obj.eq(2).attr('disabled',true);
+		  })
+		  
+		  $("#save_text").click(function(){
+		
+			   var b=confirm("确定保存修改吗？");
+			    if(b){
+				 var obj =$("#or_drtail_ul").children().children(".edit-input");
+			     updateOrderHead(obj.eq(0).val(),obj.eq(1).val(),obj.eq(19).val(),obj.eq(17).val(),obj.eq(18).val(),obj.eq(3).val(),obj.eq(4).val(),obj.eq(8).val(),obj.eq(11).val(),obj.eq(10).val(),obj.eq(9).val(),obj.eq(12).val(),obj.eq(13).val(),obj.eq(15).val(),obj.eq(16).val(),obj.eq(20).val());
+				}
+			   
+			  
+		  })
+		  
+		   $("#cancel_text").click(function(){
+		       $(this).css('display','none');
+			   $("#save_text").css('display','none');
+		       $("#edit_text").fadeIn();
+		       $("#or_drtail_ul").children().children(".edit-input").attr('disabled',true);
+			   recordDetail(cache_N);
+		  
+		   })
+		  
+		  $("#resend_msg").click(function(){
+		      var obj=$("#or_drtail_ul").children().children(".edit-input");
+		      if(!obj.eq(15).attr('disabled')){
+			   alert("请先保存再重发");
+			   return;
+			 }
+			  var b=confirm("确定重新发送订单【"+obj.eq(1).val()+"】的报文吗？");
+		      if(b){
+			  resend(obj.eq(0).val());
+			  }
+		  
+		  })
+		  
+		
+		$(".div-helper").click(function(){
+		  $("#wl_select_box").css('display','none');
+		  $("#wl_gp_select_box").css('display','none');
+		})
+		
+		$("#confirm_send").click(function(){
+		
+		   if($("#wl_op_value").val()=="QB"){
+		       var obj =$("#or_drtail_ul").children().children(".edit-input");
+		       var b=confirm("确定往【启邦QB】重新发送订单【"+obj.eq(1).val()+"】吗？");
+			   if(b){
+			    $(".div-helper").click();
+			  var data={
+				  messageId:obj.eq(0).val(),
+				  weight:1
+				  }
+			    resned_QB(data,1);
+			   }
+		   }else if($("#wl_op_value").val()=="SC"){
+		   
+		     var obj =$("#or_drtail_ul").children().children(".edit-input");
+		       var b=confirm("确定往【赛诚SC】重新发送订单【"+obj.eq(1).val()+"】吗？");
+			   if(b){
+			    $(".div-helper").click();
+			  var data={
+				  messageId:obj.eq(0).val(),
+				  weight:1
+				  }
+			    resned_SC(data,1);
+			   }
+		   }
+		   
+		})
+		
+		    var mcount=0;
+			var map={};
+			var index=0;
+	
+
+		$("#confirm_gpsend").click(function(){
+		    if($("#wl_gpop_value").val()=="QB"){
+			  var b=confirm("确定往【启邦QB】重新发送这批订单吗？");
+			  if(b){
+			   $(".div-helper").click();
+			   for(var i=0;i<mcount;i++){
+			    resned_QB(map[i]);
+			   }
+			  }
+			}else if($("#wl_gpop_value").val()=="SC"){
+			   var b=confirm("确定往【赛诚SC】重新发送这批订单吗？");
+			  if(b){
+			   $(".div-helper").click();
+			   for(var i=0;i<mcount;i++){
+			    resned_SC(map[i]);
+			   }
+			  }
+			}
+		})
+		
+		$("#issue_coupon").click(function(){
+		
+			$(".or-index").css('display','none');
+			
+			$(".issue").fadeIn("fast");
+		})
+		
+		$("#add").click(function(){
+			var obj=$(".issue").children().children().children().children(".edit-input");
+			console.info(obj);
+			console.info(obj.eq(0).val());
+		    issueCoupon(obj.eq(0).val(), obj.eq(1).val(),obj.eq(2).val(),obj.eq(3).val(), $("#receive-limit").val(),obj.eq(4).val(),obj.eq(5).val(),obj.eq(6).val(),obj.eq(7).val());
+
+		})
+		
+	
+		
+		};
+　　　　return {
+
+   searchDatas : searchDatas,
+	 resend:resend,
+	 commonChecked:commonChecked,
+	 clickEvent:clickEvent
+　　　　};
+　　})(); 
+	
+	ordersRecord_module.clickEvent();
+	ordersRecord_module.commonChecked("#order_tb_1");
+	
+	$(function(){	
+	   $("#orders_record_table").ready(function(){
+	   ordersRecord_module.searchDatas(1,10);
+	   
+	   } )
+       
+  
+	})
+	
+	
+	
+	</script>
+
+</body>
+
+</html>
